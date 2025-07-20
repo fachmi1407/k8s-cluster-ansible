@@ -1,0 +1,16 @@
+- hosts: all
+  become: true
+  roles:
+    - common
+    - docker
+    - kubernetes
+
+- hosts: master
+  become: true
+  roles:
+    - master
+
+- hosts: workers
+  become: true
+  roles:
+    - worker
