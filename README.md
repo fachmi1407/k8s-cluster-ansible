@@ -19,6 +19,8 @@ Automasi setup Kubernetes cluster (1 Master + 2 Worker) menggunakan Ansible di U
 | Master | --> | Node 1 | --> | Node 2 |
 +---------+ +--------+ +--------+
 
+---
+
 Master : 192.168.50.20
 Node 1 : 192.168.50.21
 Node 2 : 192.168.50.22
