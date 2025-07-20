@@ -28,7 +28,7 @@ Node 2 : 192.168.50.22
 
 ---
 
-## 🚀 Cara Menjalankan
+### 🚀 Cara Menjalankan
 
 1. Install Ansible
 
