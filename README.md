@@ -47,7 +47,7 @@ ssh-copy-id quadrant@192.168.50.22
 
 4. Jalankan Playbook
 
-ansible-playbook -i inventory.ini playbook.yml
+ansible-playbook -i inventory.ini playbook.yml --ask-become-pass
 
 ✅ Verifikasi
 
