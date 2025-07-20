@@ -42,7 +42,7 @@ cd k8s-cluster-ansible
 3. Pastikan Akses SSH Tanpa Password ke Semua Node
 
 ssh-copy-id quadrant@192.168.50.20
-ssh-copy-id ubuquadrantntu@192.168.50.21
+ssh-copy-id quadrant@192.168.50.21
 ssh-copy-id quadrant@192.168.50.22
 
 4. Jalankan Playbook
