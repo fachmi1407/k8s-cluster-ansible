@@ -10,11 +10,15 @@
     dest: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
     mode: '0644'
 
-- name: Tambahkan repo Kubernetes pkgs.k8s.io
+- name: Tambahkan repository Kubernetes pkgs.k8s.io
   ansible.builtin.apt_repository:
     repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /"
     state: present
     filename: kubernetes
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
 
 - name: Install Kubernetes packages
   ansible.builtin.apt:
@@ -23,9 +27,8 @@
       - kubeadm
       - kubectl
     state: present
-    update_cache: yes
 
-- name: Hold Kubernetes packages
+- name: Hold Kubernetes packages agar tidak auto-update
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
