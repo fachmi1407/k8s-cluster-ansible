@@ -30,9 +30,8 @@ Node 2 : 192.168.50.22
 
 ### 🚀 Cara Menjalankan
 
-1. Install Ansible
-
 ```bash
+1. Install Ansible
 sudo apt install ansible -y
 
 ---
