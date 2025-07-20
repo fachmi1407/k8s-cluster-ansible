@@ -8,9 +8,9 @@
     line: "{{ item }}"
     create: yes
   with_items:
-    - "192.168.56.10 master"
-    - "192.168.56.11 node1"
-    - "192.168.56.12 node2"
+    - "192.168.50.20 master"
+    - "192.168.50.21 node1"
+    - "192.168.50.22 node2"
 
 - name: Disable swap
   shell: |
