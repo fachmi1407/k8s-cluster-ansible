@@ -1,28 +1,34 @@
-- name: Add Kubernetes apt key
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
+- name: Install Kubernetes components
+  hosts: all
+  become: true
+  tasks:
+    - name: Add Kubernetes apt key
+      ansible.builtin.get_url:
+        url: https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key
+        dest: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+        mode: '0644'
 
-- name: Add Kubernetes repo
-  apt_repository:
-    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
-    state: present
+    - name: Add Kubernetes apt repository
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /"
+        state: present
+        filename: kubernetes
 
-- name: Install Kubernetes packages
-  apt:
-    name:
-      - kubelet
-      - kubeadm
-      - kubectl
-    state: present
-    update_cache: yes
+    - name: Install Kubernetes packages
+      ansible.builtin.apt:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+        state: present
+        update_cache: yes
 
-- name: Hold Kubernetes packages
-  apt:
-    name: "{{ item }}"
-    state: present
-    mark: hold
-  loop:
-    - kubelet
-    - kubeadm
-    - kubectl
+    - name: Hold Kubernetes packages
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+        mark: hold
+      loop:
+        - kubelet
+        - kubeadm
+        - kubectl
