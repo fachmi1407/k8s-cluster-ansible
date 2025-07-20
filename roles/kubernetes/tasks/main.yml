@@ -1,24 +1,25 @@
-- name: Buat direktori keyrings jika belum ada
+- name: Buat direktori untuk APT keyrings
   ansible.builtin.file:
     path: /etc/apt/keyrings
     state: directory
     mode: '0755'
 
-- name: Unduh dan simpan GPG key Kubernetes
+- name: Unduh GPG key Kubernetes dan simpan ke keyring
   ansible.builtin.get_url:
     url: https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key
-    dest: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    dest: /etc/apt/keyrings/kubernetes-apt-keyring.asc
     mode: '0644'
 
 - name: Tambahkan repository Kubernetes pkgs.k8s.io
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /"
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /"
     state: present
     filename: kubernetes
 
-- name: Update apt cache
+- name: Update APT cache
   ansible.builtin.apt:
     update_cache: yes
+    cache_valid_time: 3600
 
 - name: Install Kubernetes packages
   ansible.builtin.apt:
@@ -28,7 +29,7 @@
       - kubectl
     state: present
 
-- name: Hold Kubernetes packages agar tidak auto-update
+- name: Hold Kubernetes packages
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
