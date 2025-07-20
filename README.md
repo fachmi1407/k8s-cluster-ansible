@@ -34,14 +34,10 @@ Node 2 : 192.168.50.22
 1. Install Ansible
 sudo apt install ansible -y
 
----
-
 2. Clone Repository
 
 git clone https://github.com/fachmi1407/k8s-cluster-ansible.git
 cd k8s-cluster-ansible
-
----
 
 3. Pastikan Akses SSH Tanpa Password ke Semua Node
 
@@ -49,21 +45,15 @@ ssh-copy-id ubuntu@192.168.50.20
 ssh-copy-id ubuntu@192.168.50.21
 ssh-copy-id ubuntu@192.168.50.22
 
----
-
 4. Jalankan Playbook
 
 ansible-playbook -i inventory.ini playbook.yml
-
----
 
 ✅ Verifikasi
 
 Login ke master:
 ssh ubuntu@192.168.50.20
 kubectl get nodes
-
----
 
 🧰 Struktur Project
 
