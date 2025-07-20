@@ -41,9 +41,9 @@ cd k8s-cluster-ansible
 
 3. Pastikan Akses SSH Tanpa Password ke Semua Node
 
-ssh-copy-id ubuntu@192.168.50.20
-ssh-copy-id ubuntu@192.168.50.21
-ssh-copy-id ubuntu@192.168.50.22
+ssh-copy-id quadrant@192.168.50.20
+ssh-copy-id ubuquadrantntu@192.168.50.21
+ssh-copy-id quadrant@192.168.50.22
 
 4. Jalankan Playbook
 
@@ -52,7 +52,7 @@ ansible-playbook -i inventory.ini playbook.yml
 ✅ Verifikasi
 
 Login ke master:
-ssh ubuntu@192.168.50.20
+ssh quadrant@192.168.50.20
 kubectl get nodes
 
 🧰 Struktur Project
